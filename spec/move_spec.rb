@@ -32,4 +32,16 @@ RSpec.describe Move do
       it { is_expected.to be true }
     end
   end
+
+  describe '#length' do
+    let(:letters) { ['a', 'b', 'c'] }
+
+    subject do
+      Move.new(row: 0, col: 0, direction: :down, letters: letters).length
+    end
+
+    it 'returns the length of the letters array' do
+      expect(subject).to eq letters.count
+    end
+  end
 end

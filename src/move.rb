@@ -17,6 +17,10 @@ class Move
     direction == :down
   end
 
+  def length
+    letters.count
+  end
+
   private
 
   attr_reader :direction
