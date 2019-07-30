@@ -1,5 +1,6 @@
 require_relative './board.rb'
 require_relative './human_player.rb'
+require_relative './move_validator.rb'
 
 
 class Game
@@ -56,6 +57,8 @@ class Game
   end
 
   def valid_move?(move)
-    true
+    MoveValidator
+      .new(move: move, board: board, dictionary: dictionary)
+      .valid_move?
   end
 end
