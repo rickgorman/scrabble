@@ -8,10 +8,12 @@ class Game
     players: [
       HumanPlayer.new(board: board),
       HumanPlayer.new(board: board)
-    ]
+    ],
+    dictionary: ['aaa', 'bbb', 'aba', 'aa', 'bb']
   )
     @board = board
     @players = players
+    @dictionary = dictionary
 
     @scores = {}
     initialize_scores
@@ -34,7 +36,7 @@ class Game
 
   private
 
-  attr_reader :board, :players, :scores
+  attr_reader :board, :players, :scores, :dictionary
 
   def initialize_scores
     players.each do |player|
