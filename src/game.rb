@@ -56,7 +56,14 @@ class Game
   end
 
   def apply_move(move)
-    puts "implement me!"
+    # TODO: extract the next_board method out into a MoveController, or possibly
+    #  into the Board class. I'm a bit concerned about Board knowing about Move.
+    #  Does a Board Move things, or does a DungeonMaster-like controller take
+    #  charge and perform the moving?
+
+    @board = MoveValidator
+              .new(move: move, board: board, dictionary: dictionary)
+              .instance_variable_get(:@next_board)
   end
 
   def valid_move?(move)
