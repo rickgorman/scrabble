@@ -1,4 +1,5 @@
 class Move
+  # TODO: rather than take letters, the move can take Tiles
   def initialize(row:, col:, direction:, letters:)
     @row = row
     @col = col
