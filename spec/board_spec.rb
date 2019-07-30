@@ -54,6 +54,30 @@ RSpec.describe Board do
     end
   end
 
+  describe '#get_row' do
+    let(:board) { Board.new(width: 3, preset: 'abcabc') }
+
+    subject { board.get_row(0) }
+
+    it "contains tiles representing 'abc' " do
+      tiles = subject
+
+      expect(tiles.map { |tile| tile.to_s }.join('')).to eq 'abc'
+    end
+  end
+
+  describe '#get_col' do
+    let(:board) { Board.new(width: 3, preset: 'abcabc') }
+
+    subject { board.get_col(0) }
+
+    it "contains tiles representing 'aa' " do
+      tiles = subject
+
+      expect(tiles.map { |tile| tile.to_s }.join('')).to eq 'aa '
+    end
+  end
+
   describe '#to_preset' do
     let(:preset) { 'heythere guy' }
 

@@ -29,6 +29,14 @@ class Board
     grid[row][col]
   end
 
+  def get_row(row_idx)
+    grid[row_idx]
+  end
+
+  def get_col(col_idx)
+    grid.transpose[col_idx]
+  end
+
   def to_preset
     grid.flatten.map { |tile| tile.to_s }
       .join('')
