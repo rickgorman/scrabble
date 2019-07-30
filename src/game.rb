@@ -1,10 +1,6 @@
 require_relative './board.rb'
+require_relative './human_player.rb'
 
-class HumanPlayer
-  def initialize(board:)
-    @board = board
-  end
-end
 
 class Game
   def initialize(
