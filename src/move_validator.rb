@@ -12,7 +12,7 @@ class MoveValidator
 
   def valid_move?
     return false if move_goes_off_the_board?
-    return false if move_goes_over_existing_word?
+    return false if move_overlaps_existing_word?
 
     dictionary_contains_all_words?(words_visible_on(next_board))
   end
@@ -31,7 +31,7 @@ class MoveValidator
     ending_index > board.width
   end
 
-  def move_goes_over_existing_word?
+  def move_overlaps_existing_word?
     move.letters.each_with_index do |_, offset|
       if move.across?
         potentially_overlapping_tile = \
