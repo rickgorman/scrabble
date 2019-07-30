@@ -146,4 +146,39 @@ RSpec.describe MoveValidator do
       it { is_expected.to be false }
     end
   end
+
+  describe '#words_visible_on (private method)' do
+    let(:dictionary) { ['aaa', 'bbb', 'abb'] }
+
+    subject do
+      MoveValidator
+        .new(board: board, move: move, dictionary: dictionary)
+        .send(:words_visible_on, board)
+    end
+
+    context 'when looking at an empty board' do
+      let(:board) { Board.new }
+      let(:move) { Move.new(row: 0, col: 0, direction: :across, letters: ['a']) }
+
+      it { is_expected.to eq [] }
+    end
+
+    context 'when looking at a board with some words on it' do
+      let(:preset) {
+        'aaa  ' +
+        'bb   ' +
+        ' cccc' +
+        '    d' +
+        '  abe'
+      }
+      let(:board) { Board.new(width: 5, preset: preset) }
+      let(:move) { Move.new(row: 0, col: 0, direction: :across, letters: ['a']) }
+
+      let(:expected_words) do
+        ['aaa', 'bb', 'cccc', 'abe', 'ab', 'abc', 'cde']
+      end
+
+      it { is_expected.to match_array expected_words }
+    end
+  end
 end
