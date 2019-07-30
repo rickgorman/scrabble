@@ -24,14 +24,17 @@ class Game
     until game_won?
       players.rotate!
 
-      display_board
+      display_board(current_player: players.first)
 
       move = players.first.get_move
+
       apply_move(move) if valid_move?(move)
     end
   end
 
-  def display_board
+  def display_board(current_player:)
+    puts "Current player: #{current_player}"
+    puts ""
     puts board.render
   end
 
