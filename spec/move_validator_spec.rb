@@ -5,7 +5,6 @@ require_relative '../src/board.rb'
 RSpec.describe MoveValidator do
   describe '#valid_move?' do
     let(:board) { Board.new(width: 5, preset: preset) }
-    let(:dictionary) { ['aaa', 'bbb', 'abb'] }
 
     subject do
       MoveValidator
@@ -14,6 +13,8 @@ RSpec.describe MoveValidator do
     end
 
     context 'when playing the very first word' do
+      let(:dictionary) { ['aaa'] }
+
       let(:preset) {
         '     ' +
         '     ' +
@@ -41,6 +42,8 @@ RSpec.describe MoveValidator do
       }
 
       context 'and the Move would create a word in the dictionary' do
+        let(:dictionary) { ['aaa', 'abb'] }
+
         let(:move) do
           Move.new(row: 1, col: 0, direction: :down, letters: ['b','b'])
         end
@@ -49,6 +52,8 @@ RSpec.describe MoveValidator do
       end
 
       context 'and the Move would create a word NOT in the dictionary' do
+        let(:dictionary) { ['aaa'] }
+
         let(:move) do
           Move.new(row: 1, col: 0, direction: :down, letters: ['b','b'])
         end
@@ -76,7 +81,7 @@ RSpec.describe MoveValidator do
         it { is_expected.to be true }
       end
 
-      context 'and one is not in the dictionary (ab)' do
+      context 'and one word is not in the dictionary (ab)' do
         let(:dictionary) { ['aaa', 'bbb', 'abb', 'aa'] }
 
         let(:move) do
@@ -88,6 +93,8 @@ RSpec.describe MoveValidator do
     end
 
     context 'when the word goes off the board vertically' do
+      let(:dictionary) { ['aaa'] }
+
       let(:preset) {
         '     ' +
         '     ' +
@@ -104,6 +111,8 @@ RSpec.describe MoveValidator do
     end
 
     context 'when the word goes off the board horizontally' do
+      let(:dictionary) { ['aaa'] }
+
       let(:preset) {
         '     ' +
         '     ' +
@@ -120,6 +129,8 @@ RSpec.describe MoveValidator do
     end
 
     context 'when playing over an existing word' do
+      let(:dictionary) { ['aaa', 'aba', 'bbb'] }
+
       let(:preset) {
         'aaa  ' +
         '     ' +
