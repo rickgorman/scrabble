@@ -4,7 +4,13 @@ class Tile
   end
 
   def initialize(letter)
-    @letter = letter
+    # TODO: decide if this gets sanitized here, or if we change something
+    #  higher up in the code, or if we change how empty spaces are handled
+    if letter == ' '
+      @letter = nil
+    else
+      @letter = letter
+    end
   end
 
   def occupied?
