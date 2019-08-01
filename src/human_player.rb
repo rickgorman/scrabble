@@ -11,12 +11,14 @@ class HumanPlayer
   attr_reader :rack
 
   def get_move
-    Move.new(row: 0, col: 0, direction: :down, letters: ['z'])
+    letters = rack.sample(rand(rack.size) + 1)
+
+    Move.new(row: 0, col: 0, direction: :down, letters: letters)
   end
 
   def receive_tiles(tiles)
     raise "too many tiles in rack" if rack.length + tiles.length > MAX_RACK_SIZE
-
+    
     rack.concat(tiles)
   end
 
