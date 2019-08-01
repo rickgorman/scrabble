@@ -28,15 +28,16 @@ class Game
   def play
     until game_won?
       players.rotate!
+      current_player = players.first
 
-      display_board(current_player: players.first)
+      display_board(current_player: current_player)
 
       move_attempts = 0
       loop do
         raise "too many failed move attempts. exiting." if move_attempts > 4
         move_attempts += 1
 
-        move = players.first.get_move
+        move = current_player.get_move
 
         if valid_move?(move)
           apply_move(move)
