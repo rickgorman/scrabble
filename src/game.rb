@@ -22,6 +22,7 @@ class Game
 
     @scores = {}
     initialize_scores
+    players_draw_letters
   end
 
   def play
@@ -95,6 +96,12 @@ class Game
   def initialize_scores
     players.each do |player|
       scores[player] = 0
+    end
+  end
+
+  def players_draw_letters
+    players.each do |player|
+      7.times { player.receive_tiles([bag.pop]) }
     end
   end
 
