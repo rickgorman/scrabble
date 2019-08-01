@@ -84,5 +84,3 @@ class Game
       .valid_move?
   end
 end
-
-Game.new.play
