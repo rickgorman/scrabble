@@ -72,9 +72,10 @@ class Game
     #  Does a Board Move things, or does a DungeonMaster-like controller take
     #  charge and perform the moving?
 
-    @board = MoveValidator
-              .new(move: move, board: board, dictionary: dictionary)
-              .instance_variable_get(:@next_board)
+    mv = MoveValidator.new(move: move, board: board, dictionary: dictionary)
+    mv.valid_move?
+
+    @board = mv.instance_variable_get(:@next_board)
   end
 
   def valid_move?(move)
