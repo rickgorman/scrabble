@@ -92,8 +92,7 @@ class MoveValidator
 
     # return all words that can be made from these gridlines
     gridlines
-      .map(&:split)
-      .flatten
+      .flat_map(&:split)
       .select { |word| word.length >= MIN_WORD_LENGTH }
   end
 end
