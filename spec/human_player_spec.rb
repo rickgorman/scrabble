@@ -70,7 +70,7 @@ RSpec.describe HumanPlayer do
       it 'raises an exception' do
         expect {
           player.drop_tiles(tiles_to_drop)
-        }.to raise_exception /tiles not in hand/
+        }.to raise_exception /tiles not in rack/
       end
     end
 
@@ -80,7 +80,7 @@ RSpec.describe HumanPlayer do
       it 'raises an exception' do
         expect {
           player.drop_tiles(tiles_to_drop)
-        }.to raise_exception /tiles not in hand/
+        }.to raise_exception /tiles not in rack/
       end
     end
   end

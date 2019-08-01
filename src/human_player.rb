@@ -24,7 +24,7 @@ class HumanPlayer
     begin
       incoming_tiles.each { |tile| rack.delete_at(rack.find_index(tile)) }
     rescue
-      raise "tiles not in hand"
+      raise "some of these tiles not in rack: #{incoming_tiles} | rack: #{rack}"
     end
   end
 end
