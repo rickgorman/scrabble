@@ -16,6 +16,10 @@ class Game
     @players = players
     @dictionary = dictionary
 
+    # TODO: extract bag into a LetterBag
+    # - add methods: receive_tiles, pop_tiles
+    @bag = initialize_word_bag
+
     @scores = {}
     initialize_scores
   end
@@ -51,7 +55,42 @@ class Game
 
   private
 
-  attr_reader :board, :players, :scores, :dictionary
+  attr_reader :board, :players, :scores, :dictionary, :bag
+
+  def initialize_word_bag
+    letter_frequencies = {
+      'a': 9,
+      'b': 2,
+      'c': 2,
+      'd': 4,
+      'e': 12,
+      'f': 2,
+      'g': 3,
+      'h': 2,
+      'i': 9,
+      'j': 1,
+      'k': 1,
+      'l': 4,
+      'm': 2,
+      'n': 6,
+      'o': 8,
+      'p': 2,
+      'q': 1,
+      'r': 6,
+      's': 4,
+      't': 6,
+      'u': 4,
+      'v': 2,
+      'w': 2,
+      'x': 1,
+      'y': 2,
+      'z': 1
+    }
+
+    bag = []
+    letter_frequencies.each { |letter, freq| freq.times { bag << letter.to_s } }
+    bag.shuffle
+  end
 
   def initialize_scores
     players.each do |player|
