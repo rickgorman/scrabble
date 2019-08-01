@@ -19,4 +19,12 @@ class HumanPlayer
 
     rack.concat(tiles)
   end
+
+  def drop_tiles(incoming_tiles)
+    begin
+      incoming_tiles.each { |tile| rack.delete_at(rack.find_index(tile)) }
+    rescue
+      raise "tiles not in hand"
+    end
+  end
 end

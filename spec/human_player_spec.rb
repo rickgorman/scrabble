@@ -46,4 +46,42 @@ RSpec.describe HumanPlayer do
     end
   end
 
+  describe '#drop_tiles' do
+    let(:player) { HumanPlayer.new(board: Board.new) }
+    let(:starting_tiles) { ['a','a','b','c','c','d','e'] }
+
+    before do
+      player.receive_tiles(starting_tiles)
+    end
+
+    context "when all tiles are present in the player's rack" do
+      let(:tiles_to_drop) { ['a','b','e'] }
+
+      it "removes those tiles from the player's rack" do
+        player.drop_tiles(tiles_to_drop)
+
+        expect(player.rack).to match_array ['a','c','c','d']
+      end
+    end
+
+    context "when at least one tile is not present in the player's rack" do
+      let(:tiles_to_drop) { ['z'] }
+
+      it 'raises an exception' do
+        expect {
+          player.drop_tiles(tiles_to_drop)
+        }.to raise_exception /tiles not in hand/
+      end
+    end
+
+    context "when multiple quantities of the same tile are not present in the player's rack" do
+      let(:tiles_to_drop) { ['b','b'] }
+
+      it 'raises an exception' do
+        expect {
+          player.drop_tiles(tiles_to_drop)
+        }.to raise_exception /tiles not in hand/
+      end
+    end
+  end
 end
