@@ -26,9 +26,20 @@ class Game
 
       display_board(current_player: players.first)
 
-      move = players.first.get_move
+      move_attempts = 0
+      loop do
+        raise "too many failed move attempts. exiting." if move_attempts > 4
+        move_attempts += 1
 
-      apply_move(move) if valid_move?(move)
+        move = players.first.get_move
+
+        if valid_move?(move)
+          apply_move(move)
+          break
+        else
+          puts "invalid move. try again."
+        end
+      end
     end
   end
 
