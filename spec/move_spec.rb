@@ -44,4 +44,21 @@ RSpec.describe Move do
       expect(subject).to eq letters.count
     end
   end
+
+  describe '#to_s' do
+    let(:letters) { ['a', 'b', 'c'] }
+    let(:starting_row) { 4 }
+    let(:starting_col) { 5 }
+
+    subject do
+      Move.new(row: starting_row, col: starting_col, direction: :down, letters: letters).to_s
+    end
+
+    it 'explains the letters being played' do
+      expect(subject).to match /#{letters.join('')}/
+      expect(subject).to match /\Wdown/
+      expect(subject).to match /#{starting_row}/
+      expect(subject).to match /#{starting_col}/
+    end
+  end
 end

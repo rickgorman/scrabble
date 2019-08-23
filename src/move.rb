@@ -21,6 +21,10 @@ class Move
     letters.count
   end
 
+  def to_s
+    "#{letters.join('')} played #{direction} starting at row,col: [#{row}, #{col}]"
+  end
+
   private
 
   attr_reader :direction
