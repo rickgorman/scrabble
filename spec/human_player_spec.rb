@@ -54,11 +54,13 @@ RSpec.describe HumanPlayer do
       player.receive_tiles(starting_tiles)
     end
 
+    subject { player.drop_tiles(tiles_to_drop) }
+
     context "when all tiles are present in the player's rack" do
       let(:tiles_to_drop) { ['a','b','e'] }
 
       it "removes those tiles from the player's rack" do
-        player.drop_tiles(tiles_to_drop)
+        subject
 
         expect(player.rack).to match_array ['a','c','c','d']
       end
@@ -69,7 +71,7 @@ RSpec.describe HumanPlayer do
 
       it 'raises an exception' do
         expect {
-          player.drop_tiles(tiles_to_drop)
+          subject
         }.to raise_exception /tiles not in rack/
       end
     end
@@ -79,7 +81,7 @@ RSpec.describe HumanPlayer do
 
       it 'raises an exception' do
         expect {
-          player.drop_tiles(tiles_to_drop)
+          subject
         }.to raise_exception /tiles not in rack/
       end
     end
