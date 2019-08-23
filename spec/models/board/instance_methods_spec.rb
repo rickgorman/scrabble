@@ -1,19 +1,10 @@
-require_relative './spec_helper.rb'
-require_relative '../src/board.rb'
+require_relative '../../spec_helper.rb'
+require_relative '../../../src/board.rb'
 
 RSpec.describe Board do
-  describe '::clone' do
-    let(:expected_width) { 5 }
-    let(:source_board) { Board.new(width: expected_width) }
-
-    subject { Board.clone(source_board) }
-
-    it 'creates a board with the same width as the source_board' do
-      expect(subject.width).to eq source_board.width
-    end
-
-    it 'creates a board with the same preset as the source_board' do
-      expect(subject.to_preset).to eq source_board.to_preset
+  describe '#initialize' do
+    context 'when given a preset' do
+      it 'loads the preset into the board'
     end
   end
 
@@ -79,8 +70,6 @@ RSpec.describe Board do
   end
 
   describe '#to_preset' do
-    let(:preset) { 'heythere guy' }
-
     subject { Board.new(preset: preset).to_preset }
 
     it { is_expected.to eq preset }

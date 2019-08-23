@@ -5,6 +5,31 @@ class Board
     Board.new(width: board.width, preset: board.to_preset)
   end
 
+  def self.clone_and_apply_move(board:, move:)
+    next_board = Board.clone(board)
+
+    # TODO: simplify shared code
+    if move.across?
+      move.letters.each_with_index do |letter, offset|
+        next_board.set_tile(
+          row: move.row,
+          col: move.col + offset,
+          letter: letter
+        )
+      end
+    elsif move.down?
+      move.letters.each_with_index do |letter, offset|
+        next_board.set_tile(
+          row: move.row + offset,
+          col: move.col,
+          letter: letter
+        )
+      end
+    end
+
+    next_board
+  end
+
   def initialize(width: 15, preset: nil)
     @grid = Array.new(width) do
       Array.new(width) { Tile.null }
