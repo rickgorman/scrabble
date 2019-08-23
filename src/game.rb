@@ -120,7 +120,6 @@ class Game
     #  charge and perform the moving?
 
     mv = MoveValidator.new(move: move, board: board, dictionary: dictionary)
-    mv.valid_move?
 
     @board = mv.instance_variable_get(:@next_board)
   end
