@@ -65,7 +65,6 @@ class Board
   def to_preset
     grid.flatten.map { |tile| tile.to_s }
       .join('')
-      .strip
   end
 
   def render
