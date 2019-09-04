@@ -38,7 +38,7 @@ class Game
 
         move = current_player.get_move
 
-        if valid_move?(move)
+        begin
           apply_move(move)
           display_move(current_player: current_player, move: move)
 
@@ -46,8 +46,8 @@ class Game
           current_player.receive_tiles(bag.pop(move.length))
 
           break
-        else
-          puts "invalid move. try again."
+        rescue => e
+          # puts "invalid move. try again. #{e.message}"
         end
       end
     end
