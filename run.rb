@@ -1,6 +1,6 @@
 require_relative './src/game.rb'
 
-board = Board.new(width: 7)
+board = Board.new(width: 15)
 players = [
   HumanPlayer.new(board: board),
   HumanPlayer.new(board: board)
