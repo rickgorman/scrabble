@@ -8,7 +8,8 @@ players = [
   RandomComputerPlayer.new(board: board)
 ]
 
-dictionary = ['aaa', 'bbb', 'aba', 'aa', 'bb']
+dictionary = ['aaa', 'bbb', 'aba', 'aa', 'bb', 'ab', 'ba', 'aaaa', 'aabb']
+# dictionary = File.readlines('dictionary.txt').map { |line| line.chomp }
 
 game = Game.new(
   board: board,
