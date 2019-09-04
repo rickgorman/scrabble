@@ -75,7 +75,7 @@ RSpec.describe BoardController do
     array2_freq = key_frequencies(array2)
 
     # ensure that all the distinct elements from array1 are included in array2
-    return false unless array2_freq.keys - array1_freq.keys == []
+    return false unless array1_freq.keys - array2_freq.keys == []
 
     # ensure that the count of each element in array2 is >= the count in array1
     array1_freq.keys.each do |key|
