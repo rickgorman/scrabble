@@ -1,5 +1,5 @@
-require_relative './spec_helper.rb'
-require_relative '../src/game.rb'
+require_relative '../spec_helper.rb'
+require_relative '../../src/models/game.rb'
 
 RSpec.describe Game do
   describe '#display_board' do

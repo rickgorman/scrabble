@@ -1,5 +1,5 @@
-require_relative './spec_helper.rb'
-require_relative '../src/move.rb'
+require_relative '../spec_helper.rb'
+require_relative '../../src/models/move.rb'
 
 RSpec.describe Move do
   let(:move_across) { Move.new(row: 0, col: 0, direction: :across, letters: ['a']) }

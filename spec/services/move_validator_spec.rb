@@ -1,6 +1,6 @@
-require_relative './spec_helper.rb'
-require_relative '../src/move_validator.rb'
-require_relative '../src/board.rb'
+require_relative '../spec_helper.rb'
+require_relative '../../src/services/move_validator.rb'
+require_relative '../../src/models/board.rb'
 
 RSpec.describe MoveValidator do
   describe '#valid_move?' do

@@ -1,7 +1,6 @@
-require_relative './board.rb'
-require_relative './human_player.rb'
-require_relative './move_validator.rb'
-
+require_relative '../models/board.rb'
+require_relative '../models/human_player.rb'
+require_relative '../services/move_validator.rb'
 
 class Game
   def initialize(

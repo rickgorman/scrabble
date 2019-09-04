@@ -1,5 +1,5 @@
 require_relative '../../spec_helper.rb'
-require_relative '../../../src/board.rb'
+require_relative '../../../src/models/board.rb'
 
 RSpec.describe Board do
   describe '#initialize' do

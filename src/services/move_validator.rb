@@ -1,5 +1,5 @@
-require_relative './board.rb'
-require_relative './move.rb'
+require_relative '../models/board.rb'
+require_relative '../models/move.rb'
 
 class MoveValidator
   MIN_WORD_LENGTH = 2

@@ -1,6 +1,5 @@
-require_relative './spec_helper.rb'
-
-require_relative '../src/tile.rb'
+require_relative '../spec_helper.rb'
+require_relative '../../src/models/tile.rb'
 
 RSpec.describe Tile do
   describe '.null' do

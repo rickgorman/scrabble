@@ -1,6 +1,6 @@
-require_relative './spec_helper'
-require_relative '../src/human_player.rb'
-require_relative '../src/board.rb'
+require_relative '../spec_helper'
+require_relative '../../src/models/human_player.rb'
+require_relative '../../src/models/board.rb'
 
 RSpec.describe HumanPlayer do
   describe '#get_move' do
