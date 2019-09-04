@@ -3,6 +3,8 @@ require_relative '../models/random_computer_player.rb'
 require_relative '../services/move_validator.rb'
 
 class Game
+  MAX_MOVE_ATTEMPTS = 10000
+
   def initialize(
     board: Board.new,
     players: [
@@ -33,7 +35,7 @@ class Game
 
       move_attempts = 0
       loop do
-        raise "too many failed move attempts. exiting." if move_attempts > 4
+        raise "too many failed move attempts. exiting." if move_attempts > MAX_MOVE_ATTEMPTS
         move_attempts += 1
 
         move = current_player.get_move
