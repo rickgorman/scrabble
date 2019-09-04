@@ -1,4 +1,5 @@
-require_relative './src/game.rb'
+require_relative './src/models/game.rb'
+require_relative './src/models/board.rb'
 require_relative './src/models/random_computer_player.rb'
 
 board = Board.new(width: 15)
