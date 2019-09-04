@@ -128,7 +128,7 @@ RSpec.describe MoveValidator do
       it { is_expected.to be false }
     end
 
-    context 'when playing over an existing word' do
+    context 'when playing over an existing word, illegally' do
       let(:dictionary) { ['aaa', 'aba', 'bbb'] }
 
       let(:preset) {
@@ -141,24 +141,6 @@ RSpec.describe MoveValidator do
 
       let(:move) do
         Move.new(row: 0, col: 1, direction: :across, letters: ['b', 'b', 'b'])
-      end
-
-      it { is_expected.to be false }
-    end
-
-    context 'when a play would be unattached to the starter word' do
-      let(:dictionary) { ['aaa', 'bb'] }
-
-      let(:preset) {
-        'aaa  ' + #                     'aaa  '
-        '     ' + #                     '     '
-        '     ' + # move will create => '  bb '
-        '     ' + #                     '     '
-        '     '   #                     '     '
-      }
-
-      let(:move) do
-        Move.new(row: 2, col: 2, direction: :across, letters: ['b', 'b'])
       end
 
       it { is_expected.to be false }
@@ -180,6 +162,24 @@ RSpec.describe MoveValidator do
       end
 
       it { is_expected.to be true }
+    end
+    
+    context 'when a play would be unattached to the starter word' do
+      let(:dictionary) { ['aaa', 'bb'] }
+
+      let(:preset) {
+        'aaa  ' + #                     'aaa  '
+        '     ' + #                     '     '
+        '     ' + # move will create => '  bb '
+        '     ' + #                     '     '
+        '     '   #                     '     '
+      }
+
+      let(:move) do
+        Move.new(row: 2, col: 2, direction: :across, letters: ['b', 'b'])
+      end
+
+      it { is_expected.to be false }
     end
   end
 
