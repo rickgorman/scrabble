@@ -59,8 +59,12 @@ class MoveValidator
   end
 
   def words_visible_on(some_board)
-    # TODO: replace with a better word that describes an abstraction that can be
-    #  either a row or a column.
+    all_rows_and_columns_on(some_board)
+      .flat_map(&:split)
+      .select { |word| word.length >= MIN_WORD_LENGTH }
+  end
+
+  def all_rows_and_columns_on(some_board)
     gridlines = []
 
     # store string representations of all rows and columns
@@ -69,9 +73,6 @@ class MoveValidator
       gridlines << some_board.get_col(idx).map { |tile| tile.to_s }.join('')
     end
 
-    # return all words that can be made from these gridlines
     gridlines
-      .flat_map(&:split)
-      .select { |word| word.length >= MIN_WORD_LENGTH }
   end
 end
