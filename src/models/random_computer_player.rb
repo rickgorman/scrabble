@@ -1,6 +1,6 @@
 require_relative './move.rb'
 
-class HumanPlayer
+class RandomComputerPlayer
   MAX_RACK_SIZE = 7
 
   def initialize(board:)

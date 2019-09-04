@@ -1,17 +1,17 @@
 require_relative '../spec_helper'
-require_relative '../../src/models/human_player.rb'
+require_relative '../../src/models/random_computer_player.rb'
 require_relative '../../src/models/board.rb'
 
-RSpec.describe HumanPlayer do
+RSpec.describe RandomComputerPlayer do
   describe '#get_move' do
     let(:board) { Board.new }
-    subject { HumanPlayer.new(board: board).get_move }
+    subject { RandomComputerPlayer.new(board: board).get_move }
 
     it { is_expected.to be_a Move }
   end
 
   describe '#receive_tiles' do
-    let(:player) { HumanPlayer.new(board: Board.new) }
+    let(:player) { RandomComputerPlayer.new(board: Board.new) }
 
     subject do
       player.receive_tiles(tiles_to_receive)
@@ -47,7 +47,7 @@ RSpec.describe HumanPlayer do
   end
 
   describe '#drop_tiles' do
-    let(:player) { HumanPlayer.new(board: Board.new) }
+    let(:player) { RandomComputerPlayer.new(board: Board.new) }
     let(:starting_tiles) { ['a','a','b','c','c','d','e'] }
 
     before do
