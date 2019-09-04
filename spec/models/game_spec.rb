@@ -4,6 +4,7 @@ require_relative '../../src/models/game.rb'
 RSpec.describe Game do
   describe '#display_board' do
     let(:board) { double('board') }
+    let(:player) { double('HumanPlayer') }
 
     before do
       allow(board)
@@ -12,9 +13,22 @@ RSpec.describe Game do
 
       allow(Kernel)
         .to receive(:puts)
+
+      allow(player)
+        .to receive(:receive_tiles)
+
+      allow(player)
+        .to receive(:to_s)
+        .and_return('hi im a player')
     end
 
-    subject { Game.new(board: board).display_board }
+    subject do
+      Game.new(
+        board: board,
+        players: [player]
+      )
+        .display_board(current_player: player)
+    end
 
     it 'delegates to Board#render' do
       subject

@@ -40,6 +40,9 @@ class Game
 
         if valid_move?(move)
           apply_move(move)
+          display_move(current_player: current_player, move: move)
+          current_player.drop_tiles(move.letters)
+          current_player.receive_tiles(bag.pop(move.length))
           break
         else
           puts "invalid move. try again."
@@ -120,7 +123,12 @@ class Game
 
     mv = MoveValidator.new(move: move, board: board, dictionary: dictionary)
 
+    binding.pry
     @board = mv.instance_variable_get(:@next_board)
+  end
+
+  def display_move(current_player:, move:)
+    puts "Player #{current_player} is playing"
   end
 
   def valid_move?(move)
