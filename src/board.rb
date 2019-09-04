@@ -5,6 +5,7 @@ class Board
     Board.new(width: board.width, preset: board.to_preset)
   end
 
+  # TODO: maybe raise an exception here if the move is invalid
   def self.clone_and_apply_move(board:, move:)
     next_board = Board.clone(board)
 
