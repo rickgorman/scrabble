@@ -70,7 +70,8 @@ RSpec.describe Board do
   end
 
   describe '#to_preset' do
-    subject { Board.new(preset: preset).to_preset }
+    let(:preset) { 'asdf     ' }
+    subject { Board.new(width: 3, preset: preset).to_preset }
 
     it { is_expected.to eq preset }
   end
