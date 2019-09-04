@@ -47,7 +47,6 @@ RSpec.describe BoardController do
       it 'returns a board containing the prior board state' do
         next_board = subject
         next_board_letters = next_board.to_preset.split('')
-        new_letters = next_board_letters - existing_board_letters
 
         expect(
           second_array_includes_first?(
