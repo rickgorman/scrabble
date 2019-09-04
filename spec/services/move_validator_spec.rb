@@ -164,6 +164,23 @@ RSpec.describe MoveValidator do
       it { is_expected.to be false }
     end
 
+    context 'when a play crosses over an existing word, legally' do
+      let(:dictionary) { ['aaa', 'bab'] }
+
+      let(:preset) {
+        '     ' +
+        '  a  ' + #                     '  a  '
+        '  a  ' + # move will create => ' bab '
+        '  a  ' + #                     '  a  '
+        '     '
+      }
+
+      let(:move) do
+        Move.new(row: 2, col: 1, direction: :across, letters: ['b', '', 'b'])
+      end
+
+      it { is_expected.to be true }
+    end
   end
 
   describe '#words_visible_on (private method)' do
