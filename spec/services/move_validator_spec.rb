@@ -32,11 +32,12 @@ RSpec.describe MoveValidator do
       end
     end
 
-    context 'when playing a word that builds on another word' do
+    # dedupe: 62a0ad
+    context 'when playing a word that builds on another word DOWN' do
       let(:preset) {
-        'aaa  ' +
-        '     ' +
-        '     ' +
+        'aaa  ' + #    'aaa  '
+        '     ' + # => 'b    '
+        '     ' + #    'b    '
         '     ' +
         '     '
       }
@@ -56,6 +57,37 @@ RSpec.describe MoveValidator do
 
         let(:move) do
           Move.new(row: 1, col: 0, direction: :down, letters: ['b','b'])
+        end
+
+        it { is_expected.to be false }
+      end
+    end
+
+    # dedupe: 62a0ad
+    context 'when playing a word that builds on another word ACROSS' do
+      let(:preset) {
+        'aaa  ' + #    'aaabb'
+        '     ' + # => '     '
+        '     ' + #    '     '
+        '     ' +
+        '     '
+      }
+
+      context 'and the Move would create a word in the dictionary' do
+        let(:dictionary) { ['aaa', 'aaabb'] }
+
+        let(:move) do
+          Move.new(row: 1, col: 0, direction: :across, letters: ['b','b'])
+        end
+
+        it { is_expected.to be true }
+      end
+
+      context 'and the Move would create a word NOT in the dictionary' do
+        let(:dictionary) { ['aaa'] }
+
+        let(:move) do
+          Move.new(row: 1, col: 0, direction: :across, letters: ['b','b'])
         end
 
         it { is_expected.to be false }
@@ -163,7 +195,7 @@ RSpec.describe MoveValidator do
 
       it { is_expected.to be true }
     end
-    
+
     context 'when a play would be unattached to the starter word' do
       let(:dictionary) { ['aaa', 'bb'] }
 
