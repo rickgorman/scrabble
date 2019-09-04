@@ -68,6 +68,10 @@ class Board
       .join('')
   end
 
+  def empty?
+    to_preset.strip == ''
+  end
+
   def render
     border_row = "+" + "-" * (width * 2 + 1) + "+"
 

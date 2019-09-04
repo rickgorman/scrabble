@@ -76,6 +76,22 @@ RSpec.describe Board do
     it { is_expected.to eq preset }
   end
 
+  describe '#empty?' do
+    subject { Board.new(width: 3, preset: preset).empty? }
+
+    context 'when the board is empty' do
+      let(:preset) { '' }
+
+      it { is_expected.to be true }
+    end
+
+    context 'when the board is not empty' do
+      let(:preset) { 'superball' }
+
+      it { is_expected.to be false }
+    end
+  end
+
   describe '#render' do
     context 'when using a fresh board' do
       subject { Board.new(width: 3).render }
