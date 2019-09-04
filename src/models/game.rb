@@ -1,13 +1,13 @@
 require_relative '../models/board.rb'
-require_relative '../models/human_player.rb'
+require_relative '../models/random_computer_player.rb'
 require_relative '../services/move_validator.rb'
 
 class Game
   def initialize(
     board: Board.new,
     players: [
-      HumanPlayer.new(board: board),
-      HumanPlayer.new(board: board)
+      RandomComputerPlayer.new(board: board),
+      RandomComputerPlayer.new(board: board)
     ],
     dictionary: ['aaa', 'bbb', 'aba', 'aa', 'bb']
   )
