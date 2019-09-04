@@ -41,8 +41,10 @@ class Game
         if valid_move?(move)
           apply_move(move)
           display_move(current_player: current_player, move: move)
+
           current_player.drop_tiles(move.letters)
           current_player.receive_tiles(bag.pop(move.length))
+
           break
         else
           puts "invalid move. try again."
