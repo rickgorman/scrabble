@@ -4,7 +4,7 @@ require_relative '../services/move_validator'
 class InvalidMoveException < StandardError; end
 
 class BoardController
-  def update(board:, move:, dictionary:, move_validator: nil)
+  def self.update(board:, move:, dictionary:, move_validator: nil)
     if move_validator.nil?
       move_validator = \
         MoveValidator.new(

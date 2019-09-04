@@ -4,7 +4,7 @@ require_relative '../../src/services/move_validator.rb'
 require_relative '../../src/models/move.rb'
 
 RSpec.describe BoardController do
-  describe '#update' do
+  describe '::update' do
     let(:move) { double('move') }
     let(:existing_board) { double('board') }
     let(:dictionary) { ['aabc', 'aaaaa'] }
@@ -18,7 +18,7 @@ RSpec.describe BoardController do
     end
 
     subject do
-      BoardController.new.update(
+      BoardController.update(
         board: existing_board,
         move: move,
         dictionary: dictionary,
