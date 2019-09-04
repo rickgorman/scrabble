@@ -8,12 +8,15 @@ class HumanPlayer
     @rack = []
   end
 
-  attr_reader :rack
+  attr_reader :rack, :board
 
   def get_move
     letters = rack.sample(rand(rack.size) + 1)
+    row = rand(board.width)
+    col = rand(board.width)
+    direction = rand(2) == 1 ? :down : :across
 
-    Move.new(row: 0, col: 0, direction: :down, letters: letters)
+    Move.new(row: row, col: col, direction: :down, letters: letters)
   end
 
   def receive_tiles(tiles)
