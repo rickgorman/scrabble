@@ -49,34 +49,13 @@ class MoveValidator
     false
   end
 
-  def next_board
-    @next_board ||= Board.clone(board)
-
-    # TODO: simplify shared code
-    if move.across?
-      move.letters.each_with_index do |letter, offset|
-        @next_board.set_tile(
-          row: move.row,
-          col: move.col + offset,
-          letter: letter
-        )
-      end
-    elsif move.down?
-      move.letters.each_with_index do |letter, offset|
-        @next_board.set_tile(
-          row: move.row + offset,
-          col: move.col,
-          letter: letter
-        )
-      end
-    end
-
-    @next_board
-  end
-
   def dictionary_contains_all_words?(words)
     # TODO: speed this up using a hashmap for the dictionary
     words.all? { |word| dictionary.include?(word) }
+  end
+
+  def next_board
+    Board.clone_and_apply_move(board: board, move: move)
   end
 
   def words_visible_on(some_board)
