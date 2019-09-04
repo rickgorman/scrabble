@@ -18,7 +18,7 @@ class HumanPlayer
 
   def receive_tiles(tiles)
     raise "too many tiles in rack" if rack.length + tiles.length > MAX_RACK_SIZE
-    
+
     rack.concat(tiles)
   end
 
