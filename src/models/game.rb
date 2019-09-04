@@ -1,6 +1,7 @@
 require_relative '../models/board.rb'
 require_relative '../models/random_computer_player.rb'
 require_relative '../services/move_validator.rb'
+require_relative '../controllers/board_controller.rb'
 
 class Game
   MAX_MOVE_ATTEMPTS = 10000
@@ -120,15 +121,11 @@ class Game
   end
 
   def apply_move(move)
-    # TODO: extract the next_board method out into a MoveController, or possibly
-    #  into the Board class. I'm a bit concerned about Board knowing about Move.
-    #  Does a Board Move things, or does a DungeonMaster-like controller take
-    #  charge and perform the moving?
-
-    mv = MoveValidator.new(move: move, board: board, dictionary: dictionary)
-
-    binding.pry
-    @board = mv.instance_variable_get(:@next_board)
+    @board = BoardController.update(
+      board: board,
+      move: move,
+      dictionary: dictionary
+    )
   end
 
   def display_move(current_player:, move:)
