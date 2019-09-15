@@ -30,6 +30,22 @@ RSpec.describe Tile do
     end
   end
 
+  describe '#empty?' do
+    subject { Tile.new(letter).empty? }
+
+    context 'when the tile represents a letter' do
+      let(:letter) { 'a' }
+
+      it { is_expected.to be false }
+    end
+
+    context 'when the tile represents an empty space' do
+      let(:letter) { nil }
+
+      it { is_expected.to be true }
+    end
+  end
+
   describe '#to_s' do
     subject { Tile.new(letter).to_s }
 

@@ -17,6 +17,10 @@ class Tile
     !letter.nil?
   end
 
+  def empty?
+    !occupied?
+  end
+
   def to_s
     return ' ' if letter.nil?
 
