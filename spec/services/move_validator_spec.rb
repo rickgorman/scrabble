@@ -66,9 +66,9 @@ RSpec.describe MoveValidator do
     # dedupe: 62a0ad
     context 'when playing a word that builds on another word ACROSS' do
       let(:preset) {
-        'aaa  ' + #    'aaabb'
-        '     ' + # => '     '
-        '     ' + #    '     '
+        'aaa  ' +
+        '     ' +
+        '     ' +
         '     ' +
         '     '
       }
@@ -77,6 +77,11 @@ RSpec.describe MoveValidator do
         let(:dictionary) { ['aaa', 'aaabb'] }
 
         let(:move) do
+          # 'aaa  '      'aaabb'
+          # '     '   => '     '
+          # '     '      '     '
+          # '     '
+          # '     '
           Move.new(row: 0, col: 3, direction: :across, letters: ['b','b'])
         end
 
@@ -87,6 +92,11 @@ RSpec.describe MoveValidator do
         let(:dictionary) { ['aaa'] }
 
         let(:move) do
+          # 'aaa  '      'aaa  '
+          # '     '   => 'bb   '
+          # '     '      '     '
+          # '     '
+          # '     '
           Move.new(row: 1, col: 0, direction: :across, letters: ['b','b'])
         end
 
@@ -104,20 +114,30 @@ RSpec.describe MoveValidator do
       }
 
       context 'and all created words are in the dictionary' do
-        let(:dictionary) { ['aaa', 'bbb', 'abb', 'aa'] }
+        let(:dictionary) { ['aaa', 'bbb', 'ab'] }
 
         let(:move) do
-          Move.new(row: 1, col: 1, direction: :across, letters: ['a','a','a'])
+          # 'aaa  '      'aaa  '
+          # '     '   => ' bbb '
+          # '     '      '     '
+          # '     '
+          # '     '
+          Move.new(row: 1, col: 1, direction: :across, letters: ['b','b','b'])
         end
 
         it { is_expected.to be true }
       end
 
-      context 'and one word is not in the dictionary (ab)' do
-        let(:dictionary) { ['aaa', 'bbb', 'abb', 'aa'] }
+      context 'and at least one word is NOT in the dictionary (aa)' do
+        let(:dictionary) { ['aaa', 'bab', 'ab'] }
 
         let(:move) do
-          Move.new(row: 1, col: 1, direction: :across, letters: ['a','b','a'])
+          # 'aaa  '      'aaa  '
+          # '     '   => ' bab '
+          # '     '      '     '
+          # '     '
+          # '     '
+          Move.new(row: 1, col: 1, direction: :across, letters: ['b','a','b'])
         end
 
         it { is_expected.to be false }
