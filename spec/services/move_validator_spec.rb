@@ -180,7 +180,7 @@ RSpec.describe MoveValidator do
       it { is_expected.to be false }
     end
 
-    context 'when playing over an existing word, illegally' do
+    context 'when playing over an existing word (illegally)' do
       let(:dictionary) { ['aaa', 'aba', 'bbb'] }
 
       let(:preset) {
@@ -198,7 +198,7 @@ RSpec.describe MoveValidator do
       it { is_expected.to be false }
     end
 
-    context 'when a play crosses over an existing word, legally' do
+    context 'when a play crosses over an existing word (legally)' do
       let(:dictionary) { ['aaa', 'bab'] }
 
       let(:preset) {
