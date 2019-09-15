@@ -87,17 +87,15 @@ class MoveValidator
         existing_tile_row = existing_tile_position[0]
         existing_tile_col = existing_tile_position[1]
 
-        if move.across?
-          return false if (new_tile_row == existing_tile_row) && (
-            new_tile_col == existing_tile_col - 1 ||
-            new_tile_col == existing_tile_col + 1
-          )
-        elsif move.down?
-          return false if (new_tile_col == existing_tile_col) && (
-            new_tile_row == existing_tile_row + 1 ||
-            new_tile_row == existing_tile_row - 1
-          )
-        end
+        return false if (new_tile_row == existing_tile_row) && (
+          new_tile_col == existing_tile_col - 1 ||
+          new_tile_col == existing_tile_col + 1
+        )
+
+        return false if (new_tile_col == existing_tile_col) && (
+          new_tile_row == existing_tile_row + 1 ||
+          new_tile_row == existing_tile_row - 1
+        )
       end
     end
 
