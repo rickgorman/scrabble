@@ -210,7 +210,7 @@ RSpec.describe MoveValidator do
       }
 
       let(:move) do
-        Move.new(row: 2, col: 1, direction: :across, letters: ['b', '', 'b'])
+        Move.new(row: 2, col: 1, direction: :across, letters: ['b', 'b'])
       end
 
       it { is_expected.to be true }

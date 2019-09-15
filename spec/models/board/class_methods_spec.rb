@@ -5,7 +5,6 @@ require_relative '../../../src/services/move_validator.rb'
 RSpec.describe Board do
   describe '::clone' do
     let(:expected_width) { 5 }
-    let(:source_board) { Board.new(width: expected_width) }
 
     subject { Board.clone(source_board) }
 
@@ -35,6 +34,7 @@ RSpec.describe Board do
     end
 
     context 'when the move is valid' do
+      let(:source_board) { Board.new(width: 5) }
       let(:source_board_letters) { source_board.to_preset.split('') }
 
       it 'does not mutate the existing board' do
@@ -67,7 +67,12 @@ RSpec.describe Board do
         source_board_letters = source_board.to_preset.split('')
         new_letters = additional_letters(source_board_letters, next_board_letters)
 
+        binding.pry
         expect(new_letters).to match_array move.letters
+      end
+
+      context 'and the move is played across an existing word' do
+
       end
     end
   end

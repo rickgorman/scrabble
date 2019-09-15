@@ -12,7 +12,6 @@ class MoveValidator
 
   def valid_move?
     return false if move_goes_off_the_board?
-    # return false if move_overlaps_existing_word?
     return false if move_is_disconnected_from_existing_words?
 
     dictionary_contains_all_words?(words_visible_on(next_board))
@@ -32,24 +31,6 @@ class MoveValidator
     ending_index > board.width
   end
 
-  def move_overlaps_existing_word?
-    move.letters.each_with_index do |_, offset|
-      if move.across?
-        potentially_overlapping_tile = \
-          board.get_tile(row: move.row, col: move.col + offset)
-      elsif move.down?
-        potentially_overlapping_tile = \
-          board.get_tile(row: move.row + offset, col: move.col)
-      else
-        raise "move does not go either down or across. check the move."
-      end
-
-      return true if potentially_overlapping_tile.occupied?
-    end
-
-    false
-  end
-
   # TODO: Remove tight coupling due to knowing implementation details of Tile.
   #  In other words, a better method than #to_preset needs to be created.
   #  Probably an accessor on Board#grid
@@ -58,26 +39,6 @@ class MoveValidator
   # existing tile (not both below/right)
   def move_is_disconnected_from_existing_words?
     return false if board.empty?
-
-    existing_tile_positions = []
-    board.to_preset.split('').each_with_index do |letter, idx|
-      next if letter == ' '
-
-      row = idx / board.width
-      col = idx % board.width
-
-      existing_tile_positions << [row, col]
-    end
-
-    new_tile_positions = []
-    move.letters.each_with_index do |letter, offset|
-      next if letter == ' '
-
-      row = move.down? ? move.row + offset : move.row
-      col = move.across? ? move.col + offset : move.col
-
-      new_tile_positions << [row, col]
-    end
 
     new_tile_positions.each do |new_tile_position|
       new_tile_row = new_tile_position[0]
@@ -127,5 +88,59 @@ class MoveValidator
     end
 
     gridlines
+  end
+
+  def existing_tile_positions
+    existing_tile_positions = []
+
+    board.to_preset.split('').each_with_index do |letter, idx|
+      next if letter == ' '
+
+      row = idx / board.width
+      col = idx % board.width
+
+      existing_tile_positions << [row, col]
+    end
+
+    existing_tile_positions
+  end
+
+  def new_tile_positions
+    new_tile_positions = []
+
+    existing_letters_in_row_count = 0
+    existing_letters_in_col_count = 0
+
+    move.letters.each_with_index do |letter, offset|
+      if move.down?
+        row = move.row + offset + existing_letters_in_row_count
+      else
+        row = move.row
+      end
+
+      if move.across?
+        col = move.col + offset + existing_letters_in_col_count
+      else
+        col = move.col
+      end
+
+      # find the next open space on the board
+      binding.pry
+      until board.get_tile(row: row, col: col).empty?
+        binding.pry
+        if move.down?
+          row += 1
+          existing_letters_in_row_count += 1
+        else
+          col += 1
+          existing_letters_in_col_count += 1
+        end
+      end
+      binding.pry
+
+      new_tile_positions << [row, col]
+    end
+
+    new_tile_positions
   end
 end
