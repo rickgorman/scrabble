@@ -12,7 +12,7 @@ class MoveValidator
 
   def valid_move?
     return false if move_goes_off_the_board?
-    return false if move_overlaps_existing_word?
+    # return false if move_overlaps_existing_word?
     return false if move_is_disconnected_from_existing_words?
 
     dictionary_contains_all_words?(words_visible_on(next_board))
