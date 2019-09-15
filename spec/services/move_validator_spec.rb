@@ -77,7 +77,7 @@ RSpec.describe MoveValidator do
         let(:dictionary) { ['aaa', 'aaabb'] }
 
         let(:move) do
-          Move.new(row: 1, col: 0, direction: :across, letters: ['b','b'])
+          Move.new(row: 0, col: 3, direction: :across, letters: ['b','b'])
         end
 
         it { is_expected.to be true }
